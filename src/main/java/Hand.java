@@ -27,6 +27,31 @@ public class Hand {
 		return cards;
 	}
 	
+	public boolean isEqualTo(Hand hand) {
+		ArrayList<Card> hand0 = this.getCards();
+		ArrayList<Card> hand1 = hand.getCards();
+		
+		if (hand0.size() != hand1.size()) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < hand0.size(); i++) {
+				if (hand0.get(i).getRank() != hand1.get(i).getRank()) {
+					return false;
+				}
+				else if (hand0.get(i).getSuit() != hand1.get(i).getSuit()) {
+					return false;
+				}
+				else if (hand0.get(i).isVisible() != hand1.get(i).isVisible()) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	
 	public void add(Card card) {
 		cards.add(card);
 		value = getValue();
