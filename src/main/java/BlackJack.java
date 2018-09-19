@@ -12,6 +12,8 @@ public class BlackJack {
 	Deck deck;
 	LinkedList<String> file;
 	
+	boolean consoleMode;
+	
 	public BlackJack() {
 		dealer = new Hand();
 		player = new Hand();
@@ -20,6 +22,7 @@ public class BlackJack {
 	public void consoleMode() {
 		deck = new Deck();
 		deck.shuffle();
+		consoleMode = true;
 	}
 	
 	public void fileMode(File input) {
@@ -35,6 +38,7 @@ public class BlackJack {
 		}
 
 		file = new LinkedList<String> (Arrays.asList(line.split("\\s+")));
+		consoleMode = false;
 	}
 	
 	public Deck getDeck() {
@@ -86,6 +90,27 @@ public class BlackJack {
 			card4.faceUp();
 			dealer.add(card4);
 		}
+		
+		System.out.println("The first round of cards have been dealt");
+	}
+	
+	public void next(String str) {
+		if (str.equals("H")) {
+			if (consoleMode)
+				player.add(deck.getTopCard());
+			else {
+				player.add(new Card (file.removeFirst()));
+			}
+		} else if (str.equals("S")) {
+			System.out.println("dealers turn");
+		} else if (str.equals("N")) {
+			
+			String next = file.removeFirst();
+			
+			if (next.equals("H") || next.equals("S")) {
+				next(next);
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -108,6 +133,15 @@ public class BlackJack {
 		}
 		
 		game.begin();
+		
+		if(game.consoleMode) {
+			System.out.println("Would you like to Hit (H) or Stand (S)");
+			if (user.nextLine() == "H" || user.nextLine() == "S") {
+				game.next(user.nextLine());
+			}
+		} else {
+			game.next("N");
+		}
 		
 		user.close();
 	}
