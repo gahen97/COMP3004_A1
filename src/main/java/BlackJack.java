@@ -13,10 +13,12 @@ public class BlackJack {
 	LinkedList<String> file;
 	
 	boolean consoleMode;
+	boolean playerEnd;
 	
 	public BlackJack() {
 		dealer = new Hand();
 		player = new Hand();
+		playerEnd = false;
 	}
 	
 	public void consoleMode() {
@@ -95,15 +97,21 @@ public class BlackJack {
 	}
 	
 	public void next(String str) {
+		
 		if (str.equals("H")) {
+			Card card;
 			if (consoleMode)
-				player.add(deck.getTopCard());
-			else {
-				player.add(new Card (file.removeFirst()));
-			}
-		} else if (str.equals("S")) {
-			System.out.println("dealers turn");
-		} else if (str.equals("N")) {
+				card = deck.getTopCard();
+			else 
+				card = new Card (file.removeFirst());
+			addToHand(player, card);
+		}
+		
+		else if (str.equals("S")) {
+			playerEnd(0);
+		}
+		
+		else if (str.equals("N")) {
 			
 			String next = file.removeFirst();
 			
@@ -113,6 +121,53 @@ public class BlackJack {
 		}
 	}
 	
+	private void addToHand(Hand player2, Card card) {
+		player2.add(card);
+		if (player2.getValue() == 21) {
+			playerEnd(1);
+		}
+		else if (player2.getValue() > 21) {
+			playerEnd(2);
+		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void playerEnd(int i) {
+		if (i == 0) {
+			System.out.println("The player stands with value " + player.getValue());
+			System.out.println("The player's hand is " + player.getCards());
+			nextDealer();
+		}
+		
+		else if (i == 1) {
+			System.out.println("The player has BlackJack with value " + player.getValue());
+			System.out.println("The player's hand is " + player.getCards());
+			nextDealer();
+		}
+		
+		else if (i == 2) {
+			System.out.println("The player busts with value " + player.getValue());
+			System.out.println("The player's hand is " + player.getCards());
+			dealerWin();
+		}
+		
+		playerEnd = true;
+	}
+	
+	public boolean isPlayerDone() {
+		return playerEnd;
+	}
+	
+	public void nextDealer() {
+		System.out.println("Dealers turn");
+		
+	}
+	
+	public void dealerWin() {
+		System.out.println("Dealer wins");
+	}
+
 	public static void main(String[] args) {
 		BlackJack game = new BlackJack();
 		Scanner user = new Scanner(System.in);
@@ -135,12 +190,16 @@ public class BlackJack {
 		game.begin();
 		
 		if(game.consoleMode) {
-			System.out.println("Would you like to Hit (H) or Stand (S)");
-			if (user.nextLine() == "H" || user.nextLine() == "S") {
-				game.next(user.nextLine());
+			while (!game.isPlayerDone()) {
+				System.out.println("Would you like to Hit (H) or Stand (S)");
+				if (user.nextLine() == "H" || user.nextLine() == "S") {
+					game.next(user.nextLine());
+				}
 			}
 		} else {
-			game.next("N");
+			while (!game.isPlayerDone()) {
+				game.next("N");
+			}
 		}
 		
 		user.close();
