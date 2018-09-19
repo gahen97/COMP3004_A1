@@ -9,8 +9,8 @@ public class DeckTest extends TestCase {
 		Deck deck2 = new Deck();
 		deck2.shuffle();
 		
-		assertEquals(false, deck2.getDeck().equals(deck0.getDeck()));
-		assertEquals(true, deck1.getDeck().equals(deck0.getDeck()));
+		assertEquals(false, deck2.isEqualTo(deck0));
+		assertEquals(true, deck1.isEqualTo(deck0));
 	}
 
 	public void testGetSize() {
