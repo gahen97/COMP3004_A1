@@ -32,6 +32,22 @@ public class HandTest extends TestCase{
 		Hand hand0 = new Hand(cards);
 
 		assertEquals(19, hand0.getValue());
+		
+		card0 = new Card("H4");
+		card1 = new Card("D2");
+		card2 = new Card("CA");
+		cards = new ArrayList<Card>(Arrays.asList(card0, card1, card2));
+		hand0 = new Hand(cards);
+
+		assertEquals(17, hand0.getValue());
+		
+		card0 = new Card("H6");
+		card1 = new Card("D8");
+		card2 = new Card("CA");
+		cards = new ArrayList<Card>(Arrays.asList(card0, card1, card2));
+		hand0 = new Hand(cards);
+
+		assertEquals(15, hand0.getValue());
 
 	}
 
