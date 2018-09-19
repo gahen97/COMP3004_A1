@@ -15,6 +15,10 @@ public class Hand {
 		value = getValue();
 	}
 	
+	public int getSize() {
+		return cards.size();
+	}
+	
 	public Card getCard(int index) {
 		return cards.get(index);
 	}

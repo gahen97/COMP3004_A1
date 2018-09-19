@@ -26,5 +26,14 @@ public class BlackJackTest extends TestCase{
 		assertEquals("CA", game.getFile().get(3));
 	}
 	
+	public void testInitialVisibilityPlayer() {
+		BlackJack game = new BlackJack();
+		game.begin();
+		Hand player = game.getPlayerHand();
+		assertEquals(2, player.getSize());
+		assertEquals(true, player.getCard(0).isVisible());
+		assertEquals(true, player.getCard(1).isVisible());
+		
+	}
 	
 }
