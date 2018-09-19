@@ -122,15 +122,14 @@ public class BlackJack {
 	}
 	
 	private void addToHand(Hand player2, Card card) {
+		card.faceUp();
 		player2.add(card);
 		if (player2.getValue() == 21) {
 			playerEnd(1);
 		}
 		else if (player2.getValue() > 21) {
 			playerEnd(2);
-		}
-		// TODO Auto-generated method stub
-		
+		}		
 	}
 
 	private void playerEnd(int i) {
@@ -188,8 +187,8 @@ public class BlackJack {
 		}
 		
 		game.begin();
-		
-		if(game.consoleMode) {
+
+		if (game.consoleMode) {
 			while (!game.isPlayerDone()) {
 				System.out.println("Would you like to Hit (H) or Stand (S)");
 				if (user.nextLine() == "H" || user.nextLine() == "S") {
@@ -201,7 +200,7 @@ public class BlackJack {
 				game.next("N");
 			}
 		}
-		
+
 		user.close();
 	}
 	
