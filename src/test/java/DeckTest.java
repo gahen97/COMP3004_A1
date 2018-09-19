@@ -6,9 +6,11 @@ public class DeckTest extends TestCase {
 	public void testShuffle() {
 		Deck deck0 = new Deck();
 		Deck deck1 = new Deck();
-		deck1.shuffle();
-		assertNotEquals(deck1, deck0);
+		Deck deck2 = new Deck();
+		deck2.shuffle();
 		
+		assertEquals(false, deck2.getDeck().equals(deck0.getDeck()));
+		assertEquals(true, deck1.getDeck().equals(deck0.getDeck()));
 	}
 
 	public void testGetSize() {
