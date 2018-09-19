@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import junit.framework.TestCase;
 
 public class HandTest extends TestCase{
@@ -25,7 +28,8 @@ public class HandTest extends TestCase{
 		Card card0 = new Card("SK");
 		Card card1 = new Card("H3");
 		Card card2 = new Card("D6");
-		Hand hand0 = new Hand([card0, card1, card2]);
+		ArrayList<Card> cards = new ArrayList<Card>(Arrays.asList(card0, card1, card2));
+		Hand hand0 = new Hand(cards);
 
 		assertEquals(19, hand0.getValue());
 
