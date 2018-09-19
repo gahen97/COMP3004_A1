@@ -1,4 +1,5 @@
 import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 public class DeckTest extends TestCase {
 	
@@ -7,6 +8,7 @@ public class DeckTest extends TestCase {
 		Deck deck1 = new Deck();
 		deck1.shuffle();
 		assertNotEquals(deck1, deck0);
+		
 	}
 
 	public void testGetSize() {
@@ -21,7 +23,7 @@ public class DeckTest extends TestCase {
 		deck2.getTopCard();
 		deck2.getTopCard();
 		deck2.getTopCard();
-		assertEquals(49, deck1.getSize());
+		assertEquals(49, deck2.getSize());
 	}
 
 }
