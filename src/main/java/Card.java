@@ -5,13 +5,13 @@ public class Card {
 	char rank;
 	boolean visible;
 
-	public void Card() {
+	public Card() {
 		suit = 0;
 		rank = 0;
 		visible = false;
 	}
 
-	public void Card(String card) {
+	public Card(String card) {
 		suit = card.charAt(0);
 		if(card.charAt(1) == '1' && card.charAt(1) == '0' )
 			rank = 'T'; // 'T' acts as a substitute for 10, this the rank variable is allowed to be a char
@@ -106,8 +106,8 @@ public class Card {
 		return string;
 	}
 	
-	public String toSring() {
-		return getRank() + " of " + getSuit();
+	public String toString() {
+		return (this.getRank() + " of " + this.getSuit());
 	}
 
 }

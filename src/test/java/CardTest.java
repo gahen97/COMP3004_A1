@@ -16,10 +16,7 @@ public class CardTest extends TestCase{
 		assertEquals("Clubs", card3.getSuit());
 	}
 	
-	public void testGetRank() {
-		Card card0 = new Card("S1");
-		assertEquals("One", card0.getRank());
-		
+	public void testGetRank() {		
 		Card card1 = new Card("S2");
 		assertEquals("Two", card1.getRank());
 		
@@ -59,6 +56,7 @@ public class CardTest extends TestCase{
 	
 	public void testToString() {
 		Card card0 = new Card("SK");
+		System.out.println(card0.toString());
 		assertEquals("King of Spades", card0.toString());
 		
 		Card card1 = new Card("HA");
@@ -67,8 +65,8 @@ public class CardTest extends TestCase{
 		Card card2 = new Card("DQ");
 		assertEquals("Queen of Diamonds", card2.toString());
 		
-		Card card3 = new Card("C1");
-		assertEquals("One of Clubs", card3.toString());
+		Card card3 = new Card("C2");
+		assertEquals("Two of Clubs", card3.toString());
 	}
 	
 	public void testFaceUp() {
@@ -76,9 +74,9 @@ public class CardTest extends TestCase{
 		assertEquals(false, card0.isVisible());
 		
 		Card card1 = new Card("HA");
-		assertEquals(false, card1.toString());
+		assertEquals(false, card1.isVisible());
 		card1.faceUp();
-		assertEquals(true, card1.toString());
+		assertEquals(true, card1.isVisible());
 	}
 
 }
