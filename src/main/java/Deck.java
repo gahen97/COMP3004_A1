@@ -48,6 +48,34 @@ public class Deck {
 		Collections.shuffle(deck);
 	}
 	
+	public ArrayList<Card> getDeck() {
+		return deck;
+	}
+	
+	public boolean isEqualTo(Deck deck) {
+		ArrayList<Card> deck0 = this.getDeck();
+		ArrayList<Card> deck1 = deck.getDeck();
+		
+		if (deck0.size() != deck1.size()) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < deck0.size(); i++) {
+				if (deck0.get(i).getRank() != deck1.get(i).getRank()) {
+					return false;
+				}
+				else if (deck0.get(i).getSuit() != deck1.get(i).getSuit()) {
+					return false;
+				}
+				else if (deck0.get(i).isVisible() != deck1.get(i).isVisible()) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	public int getSize() {
 		return deck.size();
 	}
