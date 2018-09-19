@@ -134,4 +134,31 @@ public class BlackJackTest extends TestCase{
 		assertEquals(value, player.getValue());
 
 	}
+
+	public void testDisplayPlayer() {
+		BlackJack game = new BlackJack();
+
+		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest3.txt");
+		game.fileMode(test);
+		game.begin();
+		
+		Hand hand = new Hand();
+		hand.add(new Card("SK"));
+		hand.add(new Card("HA"));
+		
+		assertEquals(hand, game.playerEnd());
+	}
+	
+	public void testPlayerBust() {
+		BlackJack game = new BlackJack();
+		
+		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest4.txt");
+		game.fileMode(test);
+		game.begin();
+		
+		game.next("N");
+		
+		assertEquals(true, game.playerBust());
+	}
 }
+
