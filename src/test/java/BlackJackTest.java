@@ -41,8 +41,7 @@ public class BlackJackTest extends TestCase{
 		assertEquals(true, player.getCard(1).isVisible());
 		
 	}
-	
-	
+		
 	public void testInitialVisibilityDealer() {
 		
 		BlackJack game = new BlackJack();
@@ -56,6 +55,26 @@ public class BlackJackTest extends TestCase{
 		assertEquals(2, dealer.getSize());
 		assertEquals(false, dealer.getCard(0).isVisible());
 		assertEquals(true, dealer.getCard(1).isVisible());
+		
+	}
+
+	public void testSingleHit() {
+		BlackJack game = new BlackJack();
+
+		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest1.txt");
+		game.fileMode(test);
+		game.begin();
+		
+		Hand player = game.getPlayerHand();
+		
+		assertEquals(2, player.getSize());
+		Card card1 = player.getCard(0);
+		Card card2 = player.getCard(1);
+		
+		game.next("N");
+		assertEquals(3, player.getSize());
+		assertEquals(card1, player.getCard(0));
+		assertEquals(card2, player.getCard(1));
 		
 	}
 }
