@@ -21,7 +21,7 @@ public class BlackJackTest extends TestCase{
 		assertNull(game.getDeck());
 		assertNotNull(game.getFile());
 		assertEquals("SK", game.getFile().get(0));
-		assertEquals("HA", game.getFile().get(1));
+		assertEquals("H2", game.getFile().get(1));
 		assertEquals("HQ", game.getFile().get(2));
 		assertEquals("CA", game.getFile().get(3));
 	}
@@ -142,11 +142,25 @@ public class BlackJackTest extends TestCase{
 		game.fileMode(test);
 		game.begin();
 		
-		Hand hand = new Hand();
-		hand.add(new Card("SK"));
-		hand.add(new Card("HA"));
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
 		
-		assertEquals(hand, game.playerEnd());
+		Hand hand = new Hand();
+		Card card1 = new Card("SK");
+		Card card2 = new Card("H2");
+		card1.faceUp();
+		card2.faceUp();
+		hand.add(card1);
+		hand.add(card2);
+		
+		assertTrue(game.isPlayerDone());
+
+		System.out.println(hand.getCards());
+		System.out.println(game.getPlayerHand().getCards());
+		assertTrue(hand.isEqualTo(game.getPlayerHand()));
+
+		//assertEquals(hand.getCards(), game.getPlayerHand().getCards());
 	}
 	
 	public void testPlayerBust() {
@@ -156,9 +170,27 @@ public class BlackJackTest extends TestCase{
 		game.fileMode(test);
 		game.begin();
 		
-		game.next("N");
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
 		
-		assertEquals(true, game.playerBust());
+		Hand hand = new Hand();
+		Card card1 = new Card("SK");
+		Card card2 = new Card("H5");
+		Card card3 = new Card("C8");
+		card1.faceUp();
+		card2.faceUp();
+		card3.faceUp();
+		hand.add(card1);
+		hand.add(card2);
+		hand.add(card3);
+		
+		assertTrue(game.isPlayerDone());
+		assertTrue(game.getPlayerHand().getValue() > 21);
+		System.out.println(hand.getCards());
+		System.out.println(game.getPlayerHand().getCards());
+		assertTrue(hand.isEqualTo(game.getPlayerHand()));
+		//assertEquals(hand.getCards(), game.getPlayerHand().getCards());
 	}
 }
 
