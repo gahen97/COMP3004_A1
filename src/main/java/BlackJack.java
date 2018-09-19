@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class BlackJack {
@@ -10,7 +10,7 @@ public class BlackJack {
 	Hand player;
 	
 	Deck deck;
-	ArrayList<String> file;
+	LinkedList<String> file;
 	
 	public BlackJack() {
 		dealer = new Hand();
@@ -34,14 +34,14 @@ public class BlackJack {
 			e.printStackTrace();
 		}
 
-		file = new ArrayList<String> (Arrays.asList(line.split("\\s+")));
+		file = new LinkedList<String> (Arrays.asList(line.split("\\s+")));
 	}
 	
 	public Deck getDeck() {
 		return deck;
 	}
 	
-	public ArrayList<String> getFile(){
+	public LinkedList<String> getFile(){
 		return file;
 	}
 	
@@ -50,7 +50,42 @@ public class BlackJack {
 	}
 	
 	public Hand getDealerHand(){
-		return player;
+		return dealer;
+	}
+	
+	public void begin() {
+		if (deck != null) {
+			Card card1 = deck.getTopCard();
+			card1.faceUp();
+			player.add(card1);
+			
+			Card card2 = deck.getTopCard();
+			card2.faceUp();
+			player.add(card2);
+			
+			Card card3 = deck.getTopCard();
+			dealer.add(card3);
+			
+			Card card4 = deck.getTopCard();
+			card4.faceUp();
+			dealer.add(card4);
+		}
+		else if (file != null) {
+			Card card1 = new Card(file.removeFirst());
+			card1.faceUp();
+			player.add(card1);
+			
+			Card card2 = new Card(file.removeFirst());
+			card2.faceUp();
+			player.add(card2);
+			
+			Card card3 = new Card(file.removeFirst());
+			dealer.add(card3);
+			
+			Card card4 = new Card(file.removeFirst());
+			card4.faceUp();
+			dealer.add(card4);
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -71,6 +106,8 @@ public class BlackJack {
 				System.out.println("Invalid input, please type in c or f");
 			}
 		}
+		
+		game.begin();
 		
 		user.close();
 	}

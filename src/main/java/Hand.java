@@ -23,6 +23,10 @@ public class Hand {
 		return cards.get(index);
 	}
 	
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+	
 	public void add(Card card) {
 		cards.add(card);
 		value = getValue();
