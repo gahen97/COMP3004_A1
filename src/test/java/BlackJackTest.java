@@ -40,7 +40,7 @@ public class BlackJackTest extends TestCase{
 	public void testInitialVisibilityDealer() {
 		BlackJack game = new BlackJack();
 		game.begin();
-		Hand dealer = game.getPlayerHand();
+		Hand dealer = game.getDealerHand();
 		assertEquals(2, dealer.getSize());
 		assertEquals(false, dealer.getCard(0).isVisible());
 		assertEquals(true, dealer.getCard(1).isVisible());
