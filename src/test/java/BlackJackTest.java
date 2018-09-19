@@ -1,4 +1,6 @@
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.PrintStream;
 
 import junit.framework.TestCase;
 
@@ -136,6 +138,9 @@ public class BlackJackTest extends TestCase{
 	}
 
 	public void testDisplayPlayer() {
+		ByteArrayOutputStream console = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(console));
+	     
 		BlackJack game = new BlackJack();
 
 		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest3.txt");
@@ -155,9 +160,7 @@ public class BlackJackTest extends TestCase{
 		hand.add(card2);
 		
 		assertTrue(game.isPlayerDone());
-
-		System.out.println(hand.getCards());
-		System.out.println(game.getPlayerHand().getCards());
+		assertEquals(hand.toString(), console.toString());
 		assertTrue(hand.isEqualTo(game.getPlayerHand()));
 
 		//assertEquals(hand.getCards(), game.getPlayerHand().getCards());
@@ -187,10 +190,92 @@ public class BlackJackTest extends TestCase{
 		
 		assertTrue(game.isPlayerDone());
 		assertTrue(game.getPlayerHand().getValue() > 21);
-		System.out.println(hand.getCards());
-		System.out.println(game.getPlayerHand().getCards());
 		assertTrue(hand.isEqualTo(game.getPlayerHand()));
 		//assertEquals(hand.getCards(), game.getPlayerHand().getCards());
+	}
+
+	public void testDealerHits() {
+
+		BlackJack game = new BlackJack();
+
+		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest5.txt");
+		game.fileMode(test);
+		game.begin();
+
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
+		
+		Hand hand = new Hand();
+		Card card1 = new Card("HQ");
+		Card card2 = new Card("C2");
+		Card card3 = new Card("D7");
+		card1.faceUp();
+		card2.faceUp();
+		card3.faceUp();
+		hand.add(card1);
+		hand.add(card2);
+		hand.add(card3);
+		
+		assertTrue(game.isPlayerDone());
+		assertTrue(hand.isEqualTo(game.getDealerHand()));
+
+
+		game = new BlackJack();
+
+		test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest6.txt");
+		game.fileMode(test);
+		game.begin();
+
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
+
+		hand = new Hand();
+		card1 = new Card("HA");
+		card2 = new Card("C2");
+		card3 = new Card("D4");
+		Card card4 = new Card("C3");
+		card1.faceUp();
+		card2.faceUp();
+		card3.faceUp();
+		card4.faceUp();
+		hand.add(card1);
+		hand.add(card2);
+		hand.add(card3);
+		hand.add(card4);
+		
+		assertTrue(game.isPlayerDone());
+		assertTrue(hand.isEqualTo(game.getDealerHand()));
+		
+		
+		game = new BlackJack();
+
+		test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest7.txt");
+		game.fileMode(test);
+		game.begin();
+
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
+
+		hand = new Hand();
+		card1 = new Card("HA");
+		card2 = new Card("C2");
+		card3 = new Card("D4");
+		card4 = new Card("C7");
+		card1.faceUp();
+		card2.faceUp();
+		card3.faceUp();
+		card4.faceUp();
+		hand.add(card1);
+		hand.add(card2);
+		hand.add(card3);
+		hand.add(card4);
+		
+		assertTrue(game.isPlayerDone());
+		assertTrue(hand.isEqualTo(game.getDealerHand()));
+		assertTrue(game.playerWins());
 	}
 }
 
