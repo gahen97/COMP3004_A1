@@ -11,7 +11,7 @@ public class BlackJackTest extends TestCase{
 	
 	public void testFileMode() {
 		BlackJack game = new BlackJack();
-		game.ConsoleMode();
+		game.FileMode();
 		assertNull(game.getDeck());
 	}
 	
