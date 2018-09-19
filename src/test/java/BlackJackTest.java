@@ -77,4 +77,61 @@ public class BlackJackTest extends TestCase{
 		assertEquals(card2, player.getCard(1));
 		
 	}
+	
+	public void testRepeatedHits() {
+		BlackJack game = new BlackJack();
+
+		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest2.txt");
+		game.fileMode(test);
+		game.begin();
+		
+		Hand player = game.getPlayerHand();
+		
+		assertEquals(2, player.getSize());
+		Card card1 = player.getCard(0);
+		Card card2 = player.getCard(1);
+		
+		game.next("N");
+		assertEquals(3, player.getSize());
+		assertEquals(card1, player.getCard(0));
+		assertEquals(card2, player.getCard(1));
+		Card card3 = player.getCard(2);
+		
+		game.next("N");
+		assertEquals(4, player.getSize());
+		assertEquals(card1, player.getCard(0));
+		assertEquals(card2, player.getCard(1));
+		assertEquals(card3, player.getCard(2));
+		Card card4 = player.getCard(3);
+				
+		game.next("N");
+		assertEquals(5, player.getSize());
+		assertEquals(card1, player.getCard(0));
+		assertEquals(card2, player.getCard(1));
+		assertEquals(card3, player.getCard(2));
+		assertEquals(card4, player.getCard(3));
+		
+	}
+	
+	public void testStand() {
+		BlackJack game = new BlackJack();
+
+		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest3.txt");
+		game.fileMode(test);
+		game.begin();
+		
+		Hand player = game.getPlayerHand();
+		
+		assertEquals(2, player.getSize());
+		Card card1 = player.getCard(0);
+		Card card2 = player.getCard(1);
+		int value = player.getValue();
+		
+		game.next("N");
+		assertEquals(2, player.getSize());
+		assertEquals(card1, player.getCard(0));
+		assertEquals(card2, player.getCard(1));
+		assertEquals(value, player.getValue());
+
+	}
 }
