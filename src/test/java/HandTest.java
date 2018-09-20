@@ -35,7 +35,6 @@ public class HandTest extends TestCase{
 		card0 = new Card("H4");
 		card1 = new Card("D2");
 		card2 = new Card("CA");
-		card2.setHighAce();
 		cards = new ArrayList<Card>(Arrays.asList(card0, card1, card2));
 		hand0 = new Hand(cards);
 		assertEquals(17, hand0.getValue());

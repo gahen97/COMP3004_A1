@@ -6,6 +6,30 @@ import junit.framework.TestCase;
 
 public class BlackJackTest extends TestCase{
 
+	public void testValidFile() {
+		BlackJack game = new BlackJack();
+		//Invalid entry
+		File test = new File("src\\test\\resources\\inputTest13.txt");
+		assertTrue(!game.validFile(test));
+		
+		//Invalid Suit
+		test = new File("src\\test\\resources\\inputTest14.txt");
+		assertTrue(!game.validFile(test));
+		
+		//Invalid Rank
+		test = new File("src\\test\\resources\\inputTest15.txt");
+		assertTrue(!game.validFile(test));
+		
+		//Repeted Card
+		test = new File("src\\test\\resources\\inputTest16.txt");
+		assertTrue(!game.validFile(test));
+		
+		//Valid file
+		test = new File("src\\test\\resources\\inputTest2.txt");
+		assertTrue(game.validFile(test));
+		
+	}
+	
 	public void testConsoleMode() {
 		BlackJack game = new BlackJack();
 		game.consoleMode();
@@ -83,7 +107,7 @@ public class BlackJackTest extends TestCase{
 	public void testRepeatedHits() {
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest2.txt");
+		File test = new File("src\\test\\resources\\inputTest2.txt");
 		game.fileMode(test);
 		game.begin();
 		
@@ -118,7 +142,7 @@ public class BlackJackTest extends TestCase{
 	public void testPlayerBust() {
 		BlackJack game = new BlackJack();
 		
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest4.txt");
+		File test = new File("src\\test\\resources\\inputTest4.txt");
 		game.fileMode(test);
 		game.begin();
 		
@@ -149,7 +173,7 @@ public class BlackJackTest extends TestCase{
 		// Dealer also hits multiple times
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest6.txt");
+		File test = new File("src\\test\\resources\\inputTest6.txt");
 		game.fileMode(test);
 		game.begin();
 
@@ -161,15 +185,18 @@ public class BlackJackTest extends TestCase{
 		Card card1 = new Card("HA");
 		Card card2 = new Card("C2");
 		Card card3 = new Card("D4");
-		Card card4 = new Card("C3");
+		Card card4 = new Card("CQ");
+		Card card5 = new Card("D9");
 		card1.faceUp();
 		card2.faceUp();
 		card3.faceUp();
 		card4.faceUp();
+		card5.faceUp();
 		hand.add(card1);
 		hand.add(card2);
 		hand.add(card3);
 		hand.add(card4);
+		hand.add(card5);
 		
 		assertTrue(game.isPlayerDone());
 		assertTrue(hand.isEqualTo(game.getDealerHand()));
@@ -208,7 +235,7 @@ public class BlackJackTest extends TestCase{
 	public void testDealerHitsDealerBust() {
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest7.txt");
+		File test = new File("src\\test\\resources\\inputTest7.txt");
 		game.fileMode(test);
 		game.begin();
 
@@ -221,14 +248,17 @@ public class BlackJackTest extends TestCase{
 		Card card2 = new Card("C2");
 		Card card3 = new Card("D4");
 		Card card4 = new Card("C7");
+		Card card5 = new Card("D9");
 		card1.faceUp();
 		card2.faceUp();
 		card3.faceUp();
 		card4.faceUp();
+		card5.faceUp();
 		hand.add(card1);
 		hand.add(card2);
 		hand.add(card3);
 		hand.add(card4);
+		hand.add(card5);
 		
 		assertTrue(game.isPlayerDone());
 		assertTrue(hand.isEqualTo(game.getDealerHand()));
@@ -295,7 +325,7 @@ public class BlackJackTest extends TestCase{
 	     
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest3.txt");
+		File test = new File("src\\test\\resources\\inputTest3.txt");
 		game.fileMode(test);
 		game.begin();
 		
@@ -326,7 +356,7 @@ public class BlackJackTest extends TestCase{
 	     
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest12.txt");
+		File test = new File("src\\test\\resources\\inputTest12.txt");
 		game.fileMode(test);
 		game.begin();
 		
@@ -347,8 +377,8 @@ public class BlackJackTest extends TestCase{
 		assertTrue(console.toString().contains(hand.toString()));
 		assertTrue(console.toString().contains("Player wins! Hand: [Queen of Hearts, King of Spades]"));
 		assertTrue(console.toString().contains("Score: 20"));
-		assertTrue(console.toString().contains("Dealer loses! Hand: [Six of Clubs, Four of Diamonds, Five of Clubs, Two of Diamonds]"));
-		assertTrue(console.toString().contains("Score: 12"));
+		assertTrue(console.toString().contains("Dealer loses. Hand: [Six of Clubs, Four of Diamonds, Five of Clubs, Two of Diamonds]"));
+		assertTrue(console.toString().contains("Score: 17"));
 	}
 	
 	public void testStand() {
@@ -425,27 +455,36 @@ public class BlackJackTest extends TestCase{
 		//Dealer wins because of better score
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest11.txt");
+		File test = new File("src\\test\\resources\\inputTest11.txt");
 		game.fileMode(test);
 		game.begin();
 		
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
+		
+		assertTrue(game.isGameOver());
 		assertTrue(game.didDealerWin());
 		assertTrue(!game.didPlayerWin());
-		assertTrue(game.isGameOver());
+
 	}
 	
 	public void testPlayerWins() {
 		//Player wins because of better score
 		BlackJack game = new BlackJack();
 
-		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest12.txt");
+		File test = new File("src\\test\\resources\\inputTest12.txt");
 		game.fileMode(test);
 		game.begin();
 	
+
+		while (!game.isPlayerDone()) {
+			game.next("N");
+		}
 		
+		assertTrue(game.isGameOver());
 		assertTrue(!game.didDealerWin());
 		assertTrue(game.didPlayerWin());
-		assertTrue(game.isGameOver());
 	}
 }
 
