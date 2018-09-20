@@ -4,6 +4,7 @@ public class Hand {
 	
 	ArrayList<Card> cards;
 	int value;
+	int aceCount = 0;
 	
 	public Hand() {
 		cards = new ArrayList<Card>();
@@ -19,8 +20,26 @@ public class Hand {
 		return cards.size();
 	}
 	
+	public void makeVisible() {
+		for (int i = 0; i < cards.size(); i++) {
+			cards.get(i).faceUp();
+		}
+	}
+	
 	public boolean containsCard(Card card) {
 		return cards.contains(card);
+	}
+	
+	public String toString() {
+		String str = "[";
+		for (int i = 0; i < cards.size(); i++) {
+			if (i != (cards.size() - 1))
+				str = str + cards.get(i).toString() + ", ";
+			else
+				str = str + cards.get(i).toString();
+		}
+		str = str + "]";
+		return str;
 	}
 	
 	public boolean containsRank(String str) {		
@@ -70,16 +89,27 @@ public class Hand {
 	}
 	
 	public int getValue() {
-		String rank;
+		aceCount = 0;
 		int total = 0;
 		for (int i = 0; i < cards.size(); i ++) {
-			rank = getCard(i).getRank();
-			total += calculateRankValue(rank, total);
+			total += calculateRankValue(getCard(i), total);
 		}
+		total = getBestValue(total);
 		return total;
 	}
 	
-	private int calculateRankValue(String rank, int total) {
+	private int getBestValue(int total) {
+		if ((total > 21) && (aceCount > 0)) {
+			total = total - 10;
+			aceCount--;
+			return getBestValue(total);
+		}
+		else
+			return total;
+	}
+
+	private int calculateRankValue(Card card, int total) {
+		String rank = card.getRank();
 		int val = 0;
 		if (rank == "Two") {
 			val += 2;
@@ -100,10 +130,8 @@ public class Hand {
 		} else if ((rank == "Ten") || (rank == "Jack") || (rank == "Queen") || (rank == "King")) {
 			val += 10;
 		} else if (rank == "Ace") {
-			if (total <= 10)
-				val += 11;
-			else 
-				val += 1;
+			val += 11;
+			aceCount++;
 		}
 		return val;
 	}

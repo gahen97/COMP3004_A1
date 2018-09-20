@@ -52,6 +52,17 @@ public class Deck {
 		return deck;
 	}
 	
+	public boolean remove(String str) {
+		Card card = new Card(str);
+		for (int i = 0; i < deck.size(); i++) {
+			if (deck.get(i).toString().equals(card.toString())) {
+				deck.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean isEqualTo(Deck deck) {
 		ArrayList<Card> deck0 = this.getDeck();
 		ArrayList<Card> deck1 = deck.getDeck();

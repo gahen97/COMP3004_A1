@@ -20,6 +20,7 @@ public class Card {
 		visible = false;
 	}
 
+	
 	public boolean isVisible() {
 		return visible;
 	}
