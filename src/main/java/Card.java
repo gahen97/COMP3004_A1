@@ -1,3 +1,5 @@
+// Student Name: Thanabalasingam Gahen
+// Student ID: 101021537
 
 public class Card {
 
@@ -5,30 +7,36 @@ public class Card {
 	char rank;
 	boolean visible;
 
+	// constructor
 	public Card() {
 		suit = 0;
 		rank = 0;
 		visible = false;
 	}
 
+	// constructor with String parameter
 	public Card(String card) {
 		suit = card.charAt(0);
-		if(card.charAt(1) == '1' && card.charAt(1) == '0' )
-			rank = 'T'; // 'T' acts as a substitute for 10, this the rank variable is allowed to be a char
-		else
+		// converts a 10 into T, so it's easier to store;
+		if (card.length() == 3) {
+			if (card.charAt(1) == '1' && card.charAt(2) == '0')
+				rank = 'T'; // 'T' acts as a substitute for 10, this allows the rank variable to be a char
+		} else
 			rank = card.charAt(1);
 		visible = false;
 	}
 
-	
+	// returns visibility
 	public boolean isVisible() {
 		return visible;
 	}
 
+	// makes card visible
 	public void faceUp() {
 		visible = true;
 	}
 
+	// returns a suit as a string
 	public String getSuit() {
 
 		String string;
@@ -53,7 +61,8 @@ public class Card {
 
 		return string;
 	}
-
+	
+	// returns the Rank as a string
 	public String getRank() {
 
 		String string;
@@ -107,6 +116,7 @@ public class Card {
 		return string;
 	}
 	
+	// converts to string
 	public String toString() {
 		return (this.getRank() + " of " + this.getSuit());
 	}

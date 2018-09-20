@@ -1,3 +1,6 @@
+// Student Name: Thanabalasingam Gahen
+// Student ID: 101021537
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -5,6 +8,7 @@ public class Deck {
 	
 	ArrayList<Card> deck;
 	
+	// constructor
 	public Deck() {
 		
 		deck = new ArrayList<Card>(52);
@@ -44,14 +48,17 @@ public class Deck {
 		}
 	}
 
+	// shuffles deck
 	public void shuffle() {
 		Collections.shuffle(deck);
 	}
 	
+	// returns deck
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}
 	
+	// removes a card based on a string parameter, and returns true if card existed	
 	public boolean remove(String str) {
 		Card card = new Card(str);
 		for (int i = 0; i < deck.size(); i++) {
@@ -63,6 +70,7 @@ public class Deck {
 		return false;
 	}
 	
+	// checks if two decks are equal
 	public boolean isEqualTo(Deck deck) {
 		ArrayList<Card> deck0 = this.getDeck();
 		ArrayList<Card> deck1 = deck.getDeck();
@@ -87,10 +95,12 @@ public class Deck {
 		return true;
 	}
 	
+	// returns deck.size();
 	public int getSize() {
 		return deck.size();
 	}
 	
+	// returns and removes the card on top of the deck
 	public Card getTopCard() {
 		return deck.remove(getSize()-1);
 	}
