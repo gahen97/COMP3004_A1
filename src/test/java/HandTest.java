@@ -1,3 +1,6 @@
+// Student Name: Thanabalasingam Gahen
+// Student ID: 101021537
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -5,6 +8,7 @@ import junit.framework.TestCase;
 
 public class HandTest extends TestCase{
 
+	//tests if add works
 	public void testAdd() {
 		
 		Hand hand0 = new Hand();
@@ -23,6 +27,7 @@ public class HandTest extends TestCase{
 		
 	}
 
+	//tests if getValue works
 	public void testGetValue() {
 
 		Card card0 = new Card("SK");
@@ -32,6 +37,7 @@ public class HandTest extends TestCase{
 		Hand hand0 = new Hand(cards);
 		assertEquals(19, hand0.getValue());
 		
+		// Ace will be treated as 11
 		card0 = new Card("H4");
 		card1 = new Card("D2");
 		card2 = new Card("CA");
@@ -39,7 +45,7 @@ public class HandTest extends TestCase{
 		hand0 = new Hand(cards);
 		assertEquals(17, hand0.getValue());
 		
-		//Ace counts as 1
+		// Ace will be treated as 1
 		card0 = new Card("H6");
 		card1 = new Card("D8");
 		card2 = new Card("CA");
@@ -47,7 +53,7 @@ public class HandTest extends TestCase{
 		hand0 = new Hand(cards);
 		assertEquals(15, hand0.getValue());
 
-		// Ace counts as 11 
+		// Ace will be treated as 11
 		card0 = new Card("H3");
 		card1 = new Card("D4");
 		card2 = new Card("CA");
@@ -55,7 +61,7 @@ public class HandTest extends TestCase{
 		hand0 = new Hand(cards);
 		assertEquals(18, hand0.getValue());
 
-		// Ace counts as 11 (blackjack)
+		// Ace will be treated as 11 (blackjack)
 		card0 = new Card("H6");
 		card1 = new Card("D4");
 		card2 = new Card("CA");

@@ -1,3 +1,6 @@
+// Student Name: Thanabalasingam Gahen
+// Student ID: 101021537
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
@@ -6,6 +9,7 @@ import junit.framework.TestCase;
 
 public class BlackJackTest extends TestCase{
 
+	//Tests for file input
 	public void testValidFile() {
 		BlackJack game = new BlackJack();
 		//Invalid entry
@@ -20,7 +24,7 @@ public class BlackJackTest extends TestCase{
 		test = new File("src\\test\\resources\\inputTest15.txt");
 		assertTrue(!game.validFile(test));
 		
-		//Repeted Card
+		//Repeated Card
 		test = new File("src\\test\\resources\\inputTest16.txt");
 		assertTrue(!game.validFile(test));
 		
@@ -30,6 +34,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 	
+	// Tests if console mode is activated
 	public void testConsoleMode() {
 		BlackJack game = new BlackJack();
 		game.consoleMode();
@@ -39,6 +44,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 	
+	// Tests if file mode is activated
 	public void testFileMode() {
 		BlackJack game = new BlackJack();
 		File test = new File("C:\\Users\\Gahen\\eclipse-workspace\\COMP3004_A1\\src\\test\\resources\\inputTest0.txt");
@@ -52,6 +58,7 @@ public class BlackJackTest extends TestCase{
 		assertEquals("CA", game.getFile().get(3));
 	}
 	
+	// tests if Player hand is visible at start
 	public void testInitialVisibilityPlayer() {
 		
 		BlackJack game = new BlackJack();
@@ -67,7 +74,8 @@ public class BlackJackTest extends TestCase{
 		assertEquals(true, player.getCard(1).isVisible());
 		
 	}
-		
+	
+	// tests if Dealer hand is visible at start
 	public void testInitialVisibilityDealer() {
 		
 		BlackJack game = new BlackJack();
@@ -84,6 +92,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 
+	// tests if the player can Hit
 	public void testSingleHit() {
 		BlackJack game = new BlackJack();
 
@@ -104,6 +113,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 	
+	// tests if the player can Hit multiple times
 	public void testRepeatedHits() {
 		BlackJack game = new BlackJack();
 
@@ -139,6 +149,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 	
+	// tests if the player can bust
 	public void testPlayerBust() {
 		BlackJack game = new BlackJack();
 		
@@ -167,6 +178,7 @@ public class BlackJackTest extends TestCase{
 		//assertEquals(hand.getCards(), game.getPlayerHand().getCards());
 	}
 
+	//tests if the Dealer hits with a soft seven hand
 	public void testDealerHitSoftSeventeen() {
 		
 		// Dealer hits if it is a soft 17
@@ -203,6 +215,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 	
+	// tests if a dealer hits with a hand value less than 16
 	public void testDealerHitLessThatSixteen() {
 		
 		// Dealer hits if dealer hand is less than 16
@@ -232,6 +245,7 @@ public class BlackJackTest extends TestCase{
 		
 	}
 
+	// tests if a dealer busts
 	public void testDealerHitsDealerBust() {
 		BlackJack game = new BlackJack();
 
@@ -265,6 +279,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(game.didPlayerWin());
 	}
 
+	// tests if player hand is displayed at end
 	public void testDisplayPlayer() {
 		ByteArrayOutputStream console = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(console));
@@ -292,6 +307,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(hand.isEqualTo(game.getPlayerHand()));
 	}
 	
+	// tests if dealer hand is displayed at end
 	public void testDisplayDealer() {
 		ByteArrayOutputStream console = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(console));
@@ -319,6 +335,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(hand.isEqualTo(game.getDealerHand()));
 	}
 	
+	// tests if score is displayed for dealer and player when dealer wins
 	public void testDisplayScoreDealerWins() {
 		ByteArrayOutputStream console = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(console));
@@ -350,6 +367,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(console.toString().contains("Score: 12"));
 	}
 	
+	// tests if score is displayed for dealer and player when player wins
 	public void testDisplayScorePlayerWins() {
 		ByteArrayOutputStream console = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(console));
@@ -381,6 +399,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(console.toString().contains("Score: 17"));
 	}
 	
+	// tests if the player can stand
 	public void testStand() {
 		BlackJack game = new BlackJack();
 
@@ -403,6 +422,7 @@ public class BlackJackTest extends TestCase{
 
 	}
 
+	// tests if the first player hand contains a blackjack
 	public void testInitialBlackJackPlayer() {
 		//Player wins at start
 		BlackJack game = new BlackJack();
@@ -419,6 +439,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(game.isGameOver());
 	}
 	
+	// tests if the first dealer hand contains a blackjack
 	public void testInitialBlackJackDealer() {
 		//Dealer wins at start
 		BlackJack game = new BlackJack();
@@ -435,6 +456,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(game.isGameOver());
 	}
 	
+	// tests if the both player and dealer hands contains a blackjack
 	public void testInitialBlackJackDealerAndPlayer() {
 		//Dealer wins at start
 		BlackJack game = new BlackJack();
@@ -451,6 +473,7 @@ public class BlackJackTest extends TestCase{
 		assertTrue(game.isGameOver());
 	}
 	
+	// test if Dealer can win
 	public void testDealerWins() {
 		//Dealer wins because of better score
 		BlackJack game = new BlackJack();
@@ -469,6 +492,7 @@ public class BlackJackTest extends TestCase{
 
 	}
 	
+	// tests if player can win
 	public void testPlayerWins() {
 		//Player wins because of better score
 		BlackJack game = new BlackJack();

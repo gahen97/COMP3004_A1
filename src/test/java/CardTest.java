@@ -1,7 +1,11 @@
+// Student Name: Thanabalasingam Gahen
+// Student ID: 101021537
+
 import junit.framework.TestCase;
 
 public class CardTest extends TestCase{
 	
+	// test if getSuit works
 	public void testGetSuit() {
 		Card card0 = new Card("S1");
 		assertEquals("Spades", card0.getSuit());
@@ -16,6 +20,7 @@ public class CardTest extends TestCase{
 		assertEquals("Clubs", card3.getSuit());
 	}
 	
+	// test if getRank works
 	public void testGetRank() {		
 		Card card1 = new Card("S2");
 		assertEquals("Two", card1.getRank());
@@ -42,7 +47,7 @@ public class CardTest extends TestCase{
 		assertEquals("Nine", card8.getRank());
 		
 		Card card9 = new Card("S10");
-		assertEquals("Nine", card9.getRank());
+		assertEquals("Ten", card9.getRank());
 		
 		Card card10 = new Card("HJ");
 		assertEquals("Jack", card10.getRank());
@@ -57,6 +62,7 @@ public class CardTest extends TestCase{
 		assertEquals("Ace", card13.getRank());
 	}
 	
+	//test if toString works
 	public void testToString() {
 		Card card0 = new Card("SK");
 		assertEquals("King of Spades", card0.toString());
@@ -71,6 +77,7 @@ public class CardTest extends TestCase{
 		assertEquals("Two of Clubs", card3.toString());
 	}
 	
+	//tests if faceUp() works
 	public void testFaceUp() {
 		Card card0 = new Card("SK");
 		assertEquals(false, card0.isVisible());
