@@ -14,11 +14,43 @@ public class BlackJack {
 	
 	boolean consoleMode;
 	boolean playerEnd;
+	boolean dealerWins;
+	boolean playerWins;
 	
 	public BlackJack() {
 		dealer = new Hand();
 		player = new Hand();
 		playerEnd = false;
+		dealerWins = false;
+		playerWins = false;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+	
+	public LinkedList<String> getFile(){
+		return file;
+	}
+	
+	public Hand getPlayerHand(){
+		return player;
+	}
+	
+	public Hand getDealerHand(){
+		return dealer;
+	}
+	
+	public boolean isPlayerDone() {
+		return playerEnd;
+	}
+
+	public boolean didPlayerWin() {
+		return playerWins;
+	}
+	
+	public boolean didDealerWin() {
+		return dealerWins;
 	}
 	
 	public void consoleMode() {
@@ -41,22 +73,6 @@ public class BlackJack {
 
 		file = new LinkedList<String> (Arrays.asList(line.split("\\s+")));
 		consoleMode = false;
-	}
-	
-	public Deck getDeck() {
-		return deck;
-	}
-	
-	public LinkedList<String> getFile(){
-		return file;
-	}
-	
-	public Hand getPlayerHand(){
-		return player;
-	}
-	
-	public Hand getDealerHand(){
-		return dealer;
 	}
 	
 	public void begin() {
@@ -148,23 +164,90 @@ public class BlackJack {
 		else if (i == 2) {
 			System.out.println("The player busts with value " + player.getValue());
 			System.out.println("The player's hand is " + player.getCards());
-			dealerWin();
+			dealerWins();
+			endGame();
 		}
 		
 		playerEnd = true;
 	}
 	
-	public boolean isPlayerDone() {
-		return playerEnd;
-	}
-	
 	public void nextDealer() {
-		System.out.println("Dealers turn");
 		
+		System.out.println("Dealers turn");
+		int value = dealer.getValue();
+		
+		if (value == 21) {
+			System.out.println("The dealer has Black Jack with value " + dealer.getValue());
+			System.out.println("The dealer's hand is " + dealer.getCards());
+			dealerWins();
+			endGame();
+		}
+
+		else if ((value <= 16) || ((value == 17) && (dealer.containsRank("Ace")))) {
+			Card card;
+			
+			if (consoleMode)
+				card = deck.getTopCard();
+			else
+				card = new Card(file.removeFirst());
+			
+			dealer.add(card);
+			nextDealer();
+		}
+		
+		else if (value > 21) {
+			System.out.println("The player busts with value " + dealer.getValue());
+			System.out.println("The dealer's hand is " + dealer.getCards());
+			playerWins();
+			endGame();
+		}
+		
+		else {
+			System.out.println("The dealer's hand is " + dealer.getCards() + " with a value of " + dealer.getValue());
+			if (player.getValue() > dealer.getValue()) {
+				System.out.println("The player has a greater value");
+				playerWins();
+			}
+			else {
+				if (player.getValue() == dealer.getValue())
+					System.out.println("The player and dealer have same value");
+				else
+					System.out.println("The dealer has a greater value");
+				dealerWins();
+			}
+		}
+
 	}
 	
-	public void dealerWin() {
+	public void dealerWins() {
 		System.out.println("Dealer wins");
+		playerWins = false;
+		dealerWins = true;
+	}
+	
+	public void playerWins() {
+		System.out.println("Player wins");
+		dealerWins = false;
+		playerWins = true;
+	}
+
+	
+	public void endGame() {
+		System.out.println("You have finished playing the game, thanks!");
+		System.exit(0);
+	}
+
+	private File promptForFile(Scanner user) {
+		System.out.println("Please enter in the path to the file");
+		File file;
+		while (true) {
+			file = new File(user.nextLine());
+			if (file.exists())
+				return file;
+			else {
+				System.out.println("Invalid file, please enter in your file path again");
+			}
+		}
 	}
 
 	public static void main(String[] args) {
@@ -204,16 +287,4 @@ public class BlackJack {
 		user.close();
 	}
 	
-	private File promptForFile(Scanner user) {
-		System.out.println("Please enter in the path to the file");
-		File file;
-		while (true) {
-			file = new File(user.nextLine());
-			if (file.exists())
-				return file;
-			else {
-				System.out.println("Invalid file, please enter in your file path again");
-			}
-		}
-	}
 }
