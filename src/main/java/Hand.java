@@ -19,6 +19,18 @@ public class Hand {
 		return cards.size();
 	}
 	
+	public boolean containsCard(Card card) {
+		return cards.contains(card);
+	}
+	
+	public boolean containsRank(String str) {		
+		for (int i = 0; i < cards.size(); i++) {
+			if (cards.get(i).getRank().equals(str))
+				return true;
+		}
+		return false;
+	}
+
 	public Card getCard(int index) {
 		return cards.get(index);
 	}
